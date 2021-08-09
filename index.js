@@ -21,6 +21,23 @@ WHEN I click on the links in the Table of Contents
 THEN I am taken to the corresponding section of the README 
 */
 
+/* creating the ReadMe.md with this bit of code */
+const fs = require("fs");
+
+fs.mkdir("./assets", (err) => {
+  if (err) {
+    console.log(err);
+  }
+  console.log("folder created");
+});
+
+fs.touch("./assets/ReadMe.md", (err) => {
+  if (err) {
+    console.log(err);
+  }
+  console.log("file created");
+});
+
 /* 
 WHEN I enter my project title
 THEN this is displayed as the title of the README
@@ -58,7 +75,7 @@ const questions = [
 
   {
     type: "input",
-    name: "Installation Instructions",
+    name: "Installation_Instructions",
     message: "How do you install your project?",
     validate: (answer) => {
       if (answer === "") {
@@ -74,13 +91,35 @@ const questions = [
     message: "How does someone use your project?",
     validate: (answer) => {
       if (answer === "") {
-        return "please enter a valid set of usage instrucitons";
+        return "please enter a valid set of usage instructions";
       }
       return true;
     },
   },
 
+  {
+    type: "input",
+    name: "Contribution_Guidelines",
+    message: "What are your project's contribution guidelines?",
+    validate: (answer) => {
+      if (answer === "") {
+        return "please enter a valid set of project guidelines";
+      }
+      return true;
+    },
+  },
 
+  {
+    type: "input",
+    name: "Tests",
+    message: "How is your project tested?",
+    validate: (answer) => {
+      if (answer === "") {
+        return "please enter a valid set of testing methods";
+      }
+      return true;
+    },
+  },
 ];
 
 inquirer
@@ -88,5 +127,4 @@ inquirer
 
   .then((answers) => {
     console.log(answers);
-  })
-  
+  });
